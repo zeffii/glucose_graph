@@ -1,6 +1,7 @@
 // graphdrawing.cpp
 #include "Window.h"
 #include "GraphDrawing.h"
+// #include "XEvent.h"
 // #include <iterator>
 
 void set_color(SDL_Renderer *renderer, SDL_Color col){
@@ -46,7 +47,7 @@ void GraphDrawing::SDLX_draw_dotted_line(SDL_Renderer *renderer, SDL_Color color
 
 void GraphDrawing::draw(struct XEvent * events, int length){
 
-    epoch_start = events[0].epoch;
+    epoch_start = events[0].whole_day;
     int bottom_y = 450;
 
     if (counter_once == 0){
@@ -68,19 +69,16 @@ void GraphDrawing::draw(struct XEvent * events, int length){
         parray[i].x = x_offset + px;
         parray[i].y = bottom_y - (events[i].glucose * 10);
 
-        filter_epoch_data(events[i].fullstr, "01", events[i].epoch, first_days);
-        // for (auto tick: minor_tick_ids){
-        //     filter_epoch_data(events[i].fullstr, tick, events[i].epoch, minor_ticks);
-        // }
-        filter_epoch_data(events[i].fullstr, "06", events[i].epoch, minor_ticks);
-        filter_epoch_data(events[i].fullstr, "11", events[i].epoch, minor_ticks);
-        filter_epoch_data(events[i].fullstr, "16", events[i].epoch, minor_ticks);
-        filter_epoch_data(events[i].fullstr, "21", events[i].epoch, minor_ticks);
-        filter_epoch_data(events[i].fullstr, "26", events[i].epoch, minor_ticks);
-
+        auto ev = events[i];
+        filter_epoch_data(ev.fullstr, "01", ev.epoch, first_days);
+        filter_epoch_data(ev.fullstr, "06", ev.epoch, minor_ticks);
+        filter_epoch_data(ev.fullstr, "11", ev.epoch, minor_ticks);
+        filter_epoch_data(ev.fullstr, "16", ev.epoch, minor_ticks);
+        filter_epoch_data(ev.fullstr, "21", ev.epoch, minor_ticks);
+        filter_epoch_data(ev.fullstr, "26", ev.epoch, minor_ticks);
     }
 
-    SDL_Color color = {142, 142, 142, 255};
+    SDL_Color color = {242, 122, 122, 255};
     SDL_SetRenderDrawColor(Window::renderer, color.r, color.g, color.b, color.a);
     SDL_RenderDrawPoints(Window::renderer, parray, length);
 

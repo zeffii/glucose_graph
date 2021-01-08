@@ -36,9 +36,11 @@ void collect_data_into_xevents(struct XEvent * events){
 
         auto *xev     =  &events[index];
         xev->epoch    =  epoch_from_string(info[0]);
+        xev->timestr  =  strip_string(info[0]);
         xev->fullstr  =  s;
         xev->comment  =  strip_string(info[2]);
         xev->tod      =  strip_string(info[3]);
+        xev->whole_day = get_whole_day_start(info[0]);
 
         if (xev->tod != "c"){
             std::string sfloat = strip_string(info[1]);
@@ -59,7 +61,11 @@ int main(int argc, char* args[])
 
     int start = 0;
 
-    // std::cout << events[6].glucose << std::endl;
+    // get the epoch range, of ful days
+    int start_day, end_day;
+    get_epoch_limits(lines, num_lines, start_day, end_day);
+    std::cout << start_day << std::endl;
+    std::cout << end_day << std::endl;
 
     Window window("Sugars", 1800, 550);
     GraphDrawing graph("test");

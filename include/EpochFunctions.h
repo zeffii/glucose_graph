@@ -48,7 +48,20 @@ int epoch_from_string(std::string time_str)
         std::cout << "Parse failed" << std::endl;
     }
     return epoch;
-}
+};
+
+int get_whole_day_start(std::string fullstr){
+    std::string day_start_str = fullstr.substr(0, 11) + "00:00";
+    return epoch_from_string(day_start_str);
+};
+
+void get_epoch_limits(std::vector<std::string> &lines, int num_lines, int &start_day, int &end_day){
+    std::string start = split_string(lines[0], ",")[0];
+    std::string last  = split_string(lines[num_lines-1], ",")[0];
+    start_day = get_whole_day_start(start);
+    end_day = get_whole_day_start(last);
+};
+
 
 // 02/06/2020 16:39, 13.3,---,d
 

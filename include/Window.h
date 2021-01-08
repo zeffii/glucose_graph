@@ -6,7 +6,6 @@
 #include <iostream>
 #include "XEvent.h"
 
-
 using namespace std;
 
 class Window {
