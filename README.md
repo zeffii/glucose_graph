@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/619340/104019750-67aca000-51bc-11eb-9bf6-e1ba1ee9488a.png)
+![image](https://user-images.githubusercontent.com/619340/104088582-59b45900-5268-11eb-92a2-5736fc141ef7.png)
 
 
 # glucose_graph
