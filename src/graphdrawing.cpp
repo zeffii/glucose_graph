@@ -62,25 +62,47 @@ void GraphDrawing::draw(struct XEvent * events, int length){
     std::vector<int> minor_ticks;
     // {"06", "11", "16", "21", "26"};
 
-    SDL_Point parray[length];
+    SDL_Point parray[length * 4];
     int x_offset = 20;
-    for (int i = 0; i < length; ++i) {
-        int px = ((events[i].epoch - epoch_start) / 86400) * 7;
-        parray[i].x = x_offset + px;
-        parray[i].y = bottom_y - (events[i].glucose * 10);
+
+    int cx = 0;
+    for (int i = 0; i < length; i++) {
 
         auto ev = events[i];
+        int px = ((ev.epoch - epoch_start) / 86400) * 7;
+
+        int pxx = x_offset + px;
+        int pxy = bottom_y - (ev.glucose * 10);
+
+        if (ev.glucose == 0.0)
+            pxy = -5;
+
+        parray[cx].x = pxx;       // [x][ ]
+        parray[cx].y = pxy;       // [ ][ ]
+        
+        parray[cx+1].x = pxx + 1; // [ ][x]
+        parray[cx+1].y = pxy;     // [ ][ ]
+        
+        parray[cx+2].x = pxx + 1; // [ ][ ]
+        parray[cx+2].y = pxy + 1; // [ ][x]
+        
+        parray[cx+3].x = pxx;     // [ ][ ]
+        parray[cx+3].y = pxy + 1; // [x][ ]
+
         filter_epoch_data(ev.fullstr, "01", ev.epoch, first_days);
         filter_epoch_data(ev.fullstr, "06", ev.epoch, minor_ticks);
         filter_epoch_data(ev.fullstr, "11", ev.epoch, minor_ticks);
         filter_epoch_data(ev.fullstr, "16", ev.epoch, minor_ticks);
         filter_epoch_data(ev.fullstr, "21", ev.epoch, minor_ticks);
         filter_epoch_data(ev.fullstr, "26", ev.epoch, minor_ticks);
+
+        cx += 4;
+
     }
 
     SDL_Color color = {242, 122, 122, 255};
     SDL_SetRenderDrawColor(Window::renderer, color.r, color.g, color.b, color.a);
-    SDL_RenderDrawPoints(Window::renderer, parray, length);
+    SDL_RenderDrawPoints(Window::renderer, parray, length*4);
 
     SDL_Color cx_axis = {74, 72, 73, 255};
     SDL_SetRenderDrawColor(Window::renderer, cx_axis.r, cx_axis.g, cx_axis.b, cx_axis.a);

@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"get_",
+				"get_whole_day_start"
+			],
+			[
+				"epo",
+				"epoch_from_string"
+			],
+			[
+				"epohc",
+				"epoch_end_day"
+			],
+			[
 				"min",
 				"minor_ticks"
 			],
@@ -14,10 +26,6 @@
 			[
 				"fo",
 				"for\tFor Loop"
-			],
-			[
-				"epo",
-				"epochs"
 			],
 			[
 				"str",
@@ -131,7 +139,7 @@
 		"cols":
 		[
 			0.0,
-			0.62625,
+			0.430075514763,
 			1.0
 		],
 		"rows":
@@ -143,7 +151,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 223.0
+		"height": 107.0
 	},
 	"output.find_results":
 	{

@@ -2,13 +2,37 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include <time.h>
+#include <time.h>       /* time_t, struct tm, time, localtime, strftime */
 #include <ctime>
 #include <vector>
 #include <fstream>
 #include <iomanip>
 #include <regex>
 #include <cctype>
+#include <stdio.h>      /* puts */
+
+
+// int main ()
+// {
+//   https://www.ibm.com/support/knowledgecenter/en/SSLTBW_2.3.0/com.ibm.zos.v2r3.bpxbd00/rttzs.htm
+
+//   time_t rawtime;
+//   struct tm * timeinfo;
+//   char buffer [80];
+  
+//   int start_unix = 1588114800;
+//   int end_unix = 1609714800;
+
+//   rawtime = start_unix;
+//   timeinfo = localtime (&rawtime);
+
+
+//   strftime (buffer,80,"Now it's %d/%m/%Y %H:%M.", timeinfo);
+//   puts (buffer);
+
+//   return 0;
+// }
+
 
 std::string strip_string(std::string s){
     std::regex r("\\s+");
