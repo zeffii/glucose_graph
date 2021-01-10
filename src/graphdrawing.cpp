@@ -1,12 +1,14 @@
 // graphdrawing.cpp
 #include "Window.h"
 #include "GraphDrawing.h"
+#include "AADrawing.h"
 // #include "XEvent.h"
 // #include <iterator>
 
 void set_color(SDL_Renderer *renderer, SDL_Color col){
     SDL_SetRenderDrawColor(renderer, col.r, col.g, col.b, col.a);
-}
+};
+
 
 void GraphDrawing::filter_epoch_data(std::string fullstr, std::string token, int epoch, std::vector<int> &tokens){
     if (fullstr.substr(0, 2) == token){
@@ -119,15 +121,30 @@ void GraphDrawing::draw(struct XEvent * events, int length){
     for (auto nf: guides){
         set_color(Window::renderer, col_ident2);
         int ypos = bottom_y - (nf * 10);
-        SDL_RenderDrawLine(Window::renderer, x_offset, ypos, (x_offset + whole_days * 7), ypos);        
+        SDL_RenderDrawLine(Window::renderer, x_offset, ypos, (x_offset + whole_days * 7), ypos);
     }
 
-    // std::cout << minor_ticks[0] << std::endl;
-    // SDL_Color col_ident3 = {74, 72, 73, 255};
-    // set_color(Window::renderer, col_ident3);
+    // draw healthy area
+    int b_bg_x = x_offset;
+    int b_bg_y = bottom_y - (guides[1] * 10);
+    int b_bg_h = (guides[2] - guides[1]) * 10;
+    int b_bg_w = (whole_days * 7);
+    SDL_Color col_good = {124, 252, 123, 55};
+    set_color(Window::renderer, col_good);
+    SDL_Rect bg_rect = { b_bg_x, b_bg_y, b_bg_w, b_bg_h };
+    SDL_RenderFillRect(Window::renderer, &bg_rect);
+
+    // time ticks
+    set_color(Window::renderer, col_ident2);
     for (auto tick: minor_ticks){
         int xpos = x_offset + tick;
         SDL_RenderDrawLine(Window::renderer, xpos, bottom_y, xpos, bottom_y + 10);
     }
+
+    SDL_Color cred = {242, 112, 12, 255};
+    drawLine(Window::renderer, cred, 80 , 200, 250, 150);
+    
+    
+
 
 }

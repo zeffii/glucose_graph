@@ -78,6 +78,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/zeffi/Desktop/GITHUB/glucose_graph/include/AADrawing.h",
 		"/C/Users/zeffi/Desktop/GITHUB/ncov19_gameover.txt",
 		"/C/2020/csv_parser/res/empyu.re"
 	],
@@ -139,7 +140,7 @@
 		"cols":
 		[
 			0.0,
-			0.430075514763,
+			0.783000787934,
 			1.0
 		],
 		"rows":
@@ -151,7 +152,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 107.0
+		"height": 164.0
 	},
 	"output.find_results":
 	{
@@ -197,7 +198,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 208.0,
+	"side_bar_width": 140.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
